@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>KI Insider – TikTok Auth</title>
+<style>
+  body { font-family: -apple-system, sans-serif; max-width: 600px; margin: 60px auto; padding: 0 20px; color: #222; }
+  code { background: #f0f0f0; padding: 8px 12px; border-radius: 6px; display: block; word-break: break-all; margin: 10px 0; font-size: 1.1em; }
+  .ok  { color: #1a7f37; }
+  .err { color: #cf222e; }
+</style>
+</head>
+<body>
+<h2>KI Insider – TikTok Login</h2>
+<div id="out">Lese Code...</div>
+<script>
+  const p = new URLSearchParams(window.location.search);
+  const code  = p.get('code');
+  const error = p.get('error');
+  const out   = document.getElementById('out');
+  if (error) {
+    out.innerHTML = '<p class="err">Fehler: ' + error + '</p>';
+  } else if (code) {
+    out.innerHTML =
+      '<p class="ok">Login erfolgreich! Kopiere diesen Code ins Terminal:</p>' +
+      '<code id="c">' + code + '</code>' +
+      '<button onclick="navigator.clipboard.writeText(document.getElementById(\'c\').innerText)">Kopieren</button>';
+  } else {
+    out.innerHTML = '<p class="err">Kein Code empfangen.</p>';
+  }
+</script>
+</body>
+</html>
